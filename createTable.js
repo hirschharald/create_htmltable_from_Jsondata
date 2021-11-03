@@ -1,10 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 // JSON data
-const data = require('./datacopy.json');
+const data = require('./data.json');
 const pathHtml = path.resolve('./build.html')
 
 const header = '<table><tr>'+ Object.keys(data[0]).map(el =>'<th>' + el +'</th>' ).join('')  + '</tr>'
+
+/**
+ * @description Generates an  table row
+ * @param {String} row
+ * @returns {String}
+ */
 const createRow = (row) => '<tr>'+ Object.values(row).map(el => '<td>'+el + '</td>').join('')+'</tr>'
 
 /**
@@ -77,8 +83,9 @@ try {
 	/* generate rows */
 	const rows = data.map(createRow);
 	/* generate table */
+
 	const table = createTable(rows.join(''))
-	console.log(table)
+
   /* generate html */
 	const html = createHtml(table);
   // console.log(table)
